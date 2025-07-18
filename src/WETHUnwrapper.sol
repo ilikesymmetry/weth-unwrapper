@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {IWETH} from "./IWETH.sol";
+import {WETH} from "solady/tokens/WETH.sol";
 
 contract WETHUnwrapper {
-    IWETH public immutable weth;
+    WETH public immutable weth;
 
     error WETHTransferFromFailed();
     error ETHTransferFailed();
 
     constructor(address _weth) {
-        weth = IWETH(_weth);
+        weth = WETH(payable(_weth));
     }
 
     receive() external payable {}

@@ -2,13 +2,13 @@
 pragma solidity ^0.8.13;
 
 import {Test, console} from "forge-std/Test.sol";
+import {WETH} from "solady/tokens/WETH.sol";
 
 import {WETHUnwrapper} from "../src/WETHUnwrapper.sol";
-import {IWETH} from "../src/IWETH.sol";
 
 contract WETHUnwrapperTest is Test {
     WETHUnwrapper public unwrapper;
-    IWETH public weth;
+    WETH public weth;
 
     address constant WETH_ADDRESS = 0x4200000000000000000000000000000000000006;
     address user = 0x515B4Ff55078066BA8B025a1e974215084FE86d5;
@@ -17,7 +17,7 @@ contract WETHUnwrapperTest is Test {
         // Fork Base mainnet
         vm.createSelectFork("base");
 
-        weth = IWETH(WETH_ADDRESS);
+        weth = WETH(payable(WETH_ADDRESS));
         unwrapper = new WETHUnwrapper(WETH_ADDRESS);
     }
 
